@@ -5,18 +5,10 @@ using UnityEngine;
 public class PipeGen : MonoBehaviour
 {
     public GameObject GenPipe, Obstacles, GeneratedPipes;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        InvokeRepeating("GeneratePipe", 0f, 2f);
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-         
+        InvokeRepeating(nameof(GeneratePipe), 0f, 2f);
     }
 
     public void GeneratePipe()
@@ -28,5 +20,4 @@ public class PipeGen : MonoBehaviour
         GameObject pipe = Instantiate(GenPipe, transform.position, Quaternion.identity);
         pipe.transform.SetParent(GeneratedPipes.transform);    
     }
-
 }

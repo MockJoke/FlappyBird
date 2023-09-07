@@ -13,7 +13,7 @@ public class Bird : MonoBehaviour
     public GameObject can, GameOver;
     public Text TimeBoard, ScoreBoard;
     Animator animator;
-    // Start is called before the first frame update
+    
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -24,8 +24,7 @@ public class Bird : MonoBehaviour
         difficulty = PlayerPrefs.GetInt("difficulty"); 
 
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         FlappyBird.velocity = new Vector2(speed, FlappyBird.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 

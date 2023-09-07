@@ -19,5 +19,4 @@ public class CameraController : MonoBehaviour
         Vector3 CameraPos = new Vector3(TargetBird.position.x + offset.x, transform.position.y, transform.position.z);
         transform.position = CameraPos; 
     }
-
 }

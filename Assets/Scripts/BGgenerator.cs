@@ -7,12 +7,6 @@ public class BGgenerator : MonoBehaviour
     public GameObject GenBG, GeneratedBG;
     public Transform RefPoint; 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
