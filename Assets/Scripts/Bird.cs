@@ -1,51 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Bird : MonoBehaviour
 {
-    Rigidbody2D FlappyBird;
-    public float speed;
-    public float GameTime;
-    public int score=0, time, HighScore = 0, difficulty; 
-    public GameObject can, GameOver;
-    public Text TimeBoard, ScoreBoard;
-    Animator animator;
+    [SerializeField] private Rigidbody2D BirdRB;
+    [SerializeField] private float speed;
+    [SerializeField] private float GameTime;
+    [SerializeField] private int score = 0;
+    [SerializeField] private int time = 0;
+    [SerializeField] private int HighScore = 0;
+    [SerializeField] private GameObject can;
+    [SerializeField] private GameObject GameOver;
+    [SerializeField] private Text TimeBoard, ScoreBoard;
+    [SerializeField] private Animator animator;
+    private string difficulty;
     
     void Start()
     {
-        animator = GetComponent<Animator>();
-        FlappyBird = GetComponent<Rigidbody2D>();
+        if (animator == null)
+            animator = GetComponent<Animator>();
+        
+        if (BirdRB == null)
+            BirdRB = GetComponent<Rigidbody2D>();
 
         HighScore = PlayerPrefs.GetInt("HighScore", 0);
 
-        difficulty = PlayerPrefs.GetInt("difficulty"); 
-
+        difficulty = PlayerPrefs.GetString("difficulty"); 
+        
+        SetSpeedBasedOnDifficulty(difficulty);
     }
     
     void Update()
     {
-        FlappyBird.velocity = new Vector2(speed, FlappyBird.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
+        BirdRB.velocity = new Vector2(speed, BirdRB.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
 
         if (Input.GetMouseButtonDown(0))
         {
-            FlappyBird.velocity = new Vector2(FlappyBird.velocity.x, speed);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y 
+            BirdRB.velocity = new Vector2(BirdRB.velocity.x, speed);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y 
         }
 
-        if (difficulty == 1)
-        {
-            BirdSpeedinEasyDiff(); 
-        }
-        else if(difficulty == 2)
-        {
-            BirdSpeedinMedDiff(); 
-        }
-        else if(difficulty == 3)
-        {
-            BirdSpeedinHardDiff(); 
-        }
+        Move();
 
         GameTime += Time.deltaTime;
 
@@ -65,46 +61,35 @@ public class Bird : MonoBehaviour
         //print(GameTime);
     }
 
-    public void BirdSpeedinEasyDiff()
+    private void SetSpeedBasedOnDifficulty(string difficultyLevel)
     {
-        speed = 5f; 
-
-        FlappyBird.velocity = new Vector2(speed, FlappyBird.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
-
-        if (Input.GetMouseButtonDown(0))
+        switch (difficultyLevel)
         {
-            FlappyBird.velocity = new Vector2(FlappyBird.velocity.x, speed);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y 
+            case nameof(Difficulty.Easy):
+                speed = 5f;
+                break;
+            case nameof(Difficulty.Medium):
+                speed = 7f;
+                break;
+            case nameof(Difficulty.Hard):
+                speed = 9f;
+                break;
         }
     }
-
-    public void BirdSpeedinMedDiff()
+    
+    private void Move()
     {
-        speed = 7f; 
-
-        FlappyBird.velocity = new Vector2(speed, FlappyBird.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
+        BirdRB.velocity = new Vector2(speed, BirdRB.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
 
         if (Input.GetMouseButtonDown(0))
         {
-            FlappyBird.velocity = new Vector2(FlappyBird.velocity.x - 2f, speed);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y 
-        }
-
-    }
-
-    public void BirdSpeedinHardDiff()
-    {
-        speed = 9f; 
-
-        FlappyBird.velocity = new Vector2(speed, FlappyBird.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            FlappyBird.velocity = new Vector2(FlappyBird.velocity.x - 2f, speed);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y 
+            BirdRB.velocity = new Vector2(BirdRB.velocity.x, speed);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y 
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "pipes")
+        if(collision.gameObject.CompareTag("pipes"))
         {
             //FlappyBird.velocity = new Vector2(0f, 0f);
             //Vector2 pos = new Vector2(transform.position.x, -4.5f);
@@ -116,12 +101,11 @@ public class Bird : MonoBehaviour
             can.GetComponent<CanvasGroup>().interactable = false;
             GameOver.SetActive(true); 
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "counter")
+        if(collision.gameObject.CompareTag("counter"))
         {
             score++; 
         }
@@ -135,7 +119,6 @@ public class Bird : MonoBehaviour
         can.GetComponent<CanvasGroup>().interactable = true;
         GameOver.SetActive(false);
         SceneManager.LoadScene("Play");
-
     }
 
     private void OnDestroy()

@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BGgenerator : MonoBehaviour
 {
-    public GameObject GenBG, GeneratedBG;
-    public Transform RefPoint; 
-
-    // Update is called once per frame
+    [SerializeField] private GameObject GenBG;
+    [SerializeField] private GameObject GeneratedBG;
+    [SerializeField] private Transform RefPoint; 
+    
     void Update()
     {
         if(transform.position.x < RefPoint.position.x)

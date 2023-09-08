@@ -1,30 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+
+public enum Difficulty
+{
+    Easy,
+    Medium,
+    Hard
+}
 
 public class Home : MonoBehaviour
 {
-    public int difficulty;
+    private int difficulty;
 
     public void Easy()
     {
-        difficulty = 1;
-        PlayerPrefs.SetInt("difficulty", difficulty);
-        SceneManager.LoadScene("Play"); 
+        OnDifficultySelection(Difficulty.Easy.ToString());
     }
 
     public void Medium()
     {
-        difficulty = 2;
-        PlayerPrefs.SetInt("difficulty", difficulty);
-        SceneManager.LoadScene("Play");
+        OnDifficultySelection(Difficulty.Medium.ToString());
     }
 
     public void Hard()
     {
-        difficulty = 3;
-        PlayerPrefs.SetInt("difficulty", difficulty);
+        OnDifficultySelection(Difficulty.Hard.ToString());
+    }
+
+    private void OnDifficultySelection(string difficultyLevel)
+    {
+        PlayerPrefs.SetString("difficulty", difficultyLevel);
         SceneManager.LoadScene("Play");
     }
 }

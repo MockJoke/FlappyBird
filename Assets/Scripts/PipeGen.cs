@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PipeGen : MonoBehaviour
 {
-    public GameObject GenPipe, Obstacles, GeneratedPipes;
+    [SerializeField] private GameObject GenPipe;
+    [SerializeField] private GameObject Obstacles;
+    [SerializeField] private GameObject GeneratedPipes;
     
     void Start()
     {
