@@ -16,7 +16,8 @@ public class Bird : MonoBehaviour
     [SerializeField] private Text TimeBoard, ScoreBoard;
     [SerializeField] private Animator animator;
     private string difficulty;
-    
+    private static readonly int BirdDieAnimHash = Animator.StringToHash("BirdDie");
+
     void Start()
     {
         if (animator == null)
@@ -94,7 +95,7 @@ public class Bird : MonoBehaviour
             //FlappyBird.velocity = new Vector2(0f, 0f);
             //Vector2 pos = new Vector2(transform.position.x, -4.5f);
             //FlappyBird.position = pos;
-            animator.SetTrigger("BirdDie");
+            animator.SetTrigger(BirdDieAnimHash);
 
             Time.timeScale = 0;
 
