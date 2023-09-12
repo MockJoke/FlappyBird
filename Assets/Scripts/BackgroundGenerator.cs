@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BGgenerator : MonoBehaviour
+public class BackgroundGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject GenBG;
     [SerializeField] private GameObject GeneratedBG;
