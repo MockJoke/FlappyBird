@@ -46,9 +46,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: MainBG
+  - name: SkyBG
     uniqueID: 1793989071
     locked: 0
   - name: Bird
     uniqueID: 424223619
+    locked: 0
+  - name: GroundBG
+    uniqueID: 4283325813
     locked: 0
