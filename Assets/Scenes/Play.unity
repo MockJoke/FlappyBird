@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 70168411}
   - component: {fileID: 70168412}
   m_Layer: 0
-  m_Name: Obstacles
+  m_Name: Pipe Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,9 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ff9cb701e3bc14a87cdb7ba1e691c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GenPipe: {fileID: 4892237183266619829, guid: ea01dd32ec59d0d4aadb9623f8457eed, type: 3}
-  Obstacles: {fileID: 70168410}
-  GeneratedPipes: {fileID: 607671365}
+  PipePrefab: {fileID: 4892237183266619829, guid: ea01dd32ec59d0d4aadb9623f8457eed,
+    type: 3}
+  GeneratedPipesContainer: {fileID: 1502780464}
 --- !u!1 &134513392
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,37 +990,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600668246}
   m_CullTransparentMesh: 0
---- !u!1 &607671365
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 607671366}
-  m_Layer: 0
-  m_Name: GeneratedPipes
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &607671366
+--- !u!4 &1069538705 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 883327557116156866, guid: 75e1e2bd78baaa742b811850b48ef6d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 727239375556057437}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607671365}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1087914684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +1006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1087914685}
   m_Layer: 0
-  m_Name: GeneratedBG
+  m_Name: GeneratedBgContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1049,7 +1024,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1069538705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1483446045
@@ -1168,6 +1144,37 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &1502780464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1502780465}
+  m_Layer: 0
+  m_Name: GeneratedPipesContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1502780465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502780464}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532729941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,7 +1307,7 @@ GameObject:
   - component: {fileID: 1586976714}
   - component: {fileID: 1586976713}
   m_Layer: 0
-  m_Name: BGgen
+  m_Name: BG Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1318,8 +1325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a774ca1da21a030459a7290b2382bbfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GenBG: {fileID: 883327557116156864, guid: 75e1e2bd78baaa742b811850b48ef6d1, type: 3}
-  GeneratedBG: {fileID: 1087914684}
+  BgPrefab: {fileID: 883327557116156864, guid: 75e1e2bd78baaa742b811850b48ef6d1, type: 3}
+  GeneratedBgContainer: {fileID: 1087914684}
   RefPoint: {fileID: 1995280690}
 --- !u!4 &1586976714
 Transform:
@@ -2199,7 +2206,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1087914685}
     m_Modifications:
     - target: {fileID: 883327557116156864, guid: 75e1e2bd78baaa742b811850b48ef6d1,
         type: 3}
@@ -2268,10 +2275,9 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 2085488051}
   - {fileID: 1586976714}
-  - {fileID: 727239375556057437}
-  - {fileID: 70168411}
-  - {fileID: 607671366}
   - {fileID: 1087914685}
+  - {fileID: 70168411}
+  - {fileID: 1502780465}
   - {fileID: 1483446049}
   - {fileID: 2098073611}
   - {fileID: 319133659}

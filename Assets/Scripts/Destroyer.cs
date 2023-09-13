@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Destroys the generated bg & pipes which are in behind out of the screen
+/// </summary>
 public class Destroyer : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
@@ -8,10 +11,5 @@ public class Destroyer : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
-
-        //if (collision.gameObject.tag == "Destroyer")
-        //{
-        //    Destroy(collision.gameObject);
-        //}
     }
 }

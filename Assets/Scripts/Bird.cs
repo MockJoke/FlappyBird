@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -35,7 +34,7 @@ public class Bird : MonoBehaviour
     
     void Update()
     {
-        BirdRB.velocity = new Vector2(speed, BirdRB.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
+        BirdRB.velocity = new Vector2(speed, BirdRB.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x continuously
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -47,16 +46,15 @@ public class Bird : MonoBehaviour
         GameTime += Time.deltaTime;
 
         time = Mathf.FloorToInt(GameTime);
-        TimeBoard.text = "TIME:" + time;
+        TimeBoard.text = "TIME: " + time;
 
         //score = time;
         ScoreBoard.text = "" + score;
-
         
         if(HighScore < score)
         {
             HighScore = score;
-            PlayerPrefs.SetInt("HighScore",HighScore); 
+            PlayerPrefs.SetInt("HighScore", HighScore); 
         }
 
         //print(GameTime);
