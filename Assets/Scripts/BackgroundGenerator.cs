@@ -18,7 +18,6 @@ public class BackgroundGenerator : MonoBehaviour
     //Generates Bg at an approx distance of bg size in x
     private void GenerateBg()
     {
-        //Move ahead the 
         transform.position = new Vector2(transform.position.x + 20f, transform.position.y);
         GameObject bg = Instantiate(BgPrefab, transform.position, Quaternion.identity);
         bg.transform.SetParent(GeneratedBgContainer.transform);
