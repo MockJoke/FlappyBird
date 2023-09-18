@@ -3,9 +3,10 @@ using UnityEngine.SceneManagement;
 
 public enum Difficulty
 {
-    Easy,
-    Medium,
-    Hard
+    None = 0,
+    Easy = 1,
+    Medium = 2,
+    Hard = 3
 }
 
 public class Home : MonoBehaviour

@@ -5,16 +5,19 @@ using UnityEngine.SceneManagement;
 public class Bird : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D BirdRB;
-    [SerializeField] private float speed;
-    [SerializeField] private float GameTime;
-    [SerializeField] private int score = 0;
-    [SerializeField] private int time = 0;
-    [SerializeField] private int HighScore = 0;
+    [SerializeField] private float speedX = 5f;
+    [SerializeField] private float speedY = 5f;
     [SerializeField] private GameObject can;
     [SerializeField] private GameObject GameOver;
     [SerializeField] private Text TimeBoard, ScoreBoard;
     [SerializeField] private Animator animator;
+    
+    private int score = 0;
+    private float gameTime;
+    private int timeCounter = 0;
+    private int HighScore = 0;
     private string difficulty;
+    
     private static readonly int BirdDieAnimHash = Animator.StringToHash("BirdDie");
 
     void Start()
@@ -34,21 +37,12 @@ public class Bird : MonoBehaviour
     
     void Update()
     {
-        BirdRB.velocity = new Vector2(speed, BirdRB.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x continuously
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            BirdRB.velocity = new Vector2(BirdRB.velocity.x, speed);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y 
-        }
-
         Move();
 
-        GameTime += Time.deltaTime;
+        gameTime += Time.deltaTime;
+        timeCounter = Mathf.FloorToInt(gameTime);
+        TimeBoard.text = "TIME: " + timeCounter;
 
-        time = Mathf.FloorToInt(GameTime);
-        TimeBoard.text = "TIME: " + time;
-
-        //score = time;
         ScoreBoard.text = "" + score;
         
         if(HighScore < score)
@@ -56,8 +50,6 @@ public class Bird : MonoBehaviour
             HighScore = score;
             PlayerPrefs.SetInt("HighScore", HighScore); 
         }
-
-        //print(GameTime);
     }
 
     private void SetSpeedBasedOnDifficulty(string difficultyLevel)
@@ -65,24 +57,24 @@ public class Bird : MonoBehaviour
         switch (difficultyLevel)
         {
             case nameof(Difficulty.Easy):
-                speed = 5f;
+                speedX = 5f;
                 break;
             case nameof(Difficulty.Medium):
-                speed = 7f;
+                speedX = 7f;
                 break;
             case nameof(Difficulty.Hard):
-                speed = 9f;
+                speedX = 9f;
                 break;
         }
     }
     
     private void Move()
     {
-        BirdRB.velocity = new Vector2(speed, BirdRB.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
+        BirdRB.velocity = new Vector2(speedX, BirdRB.velocity.y);    //set speed in x and current velocity which is -9.8 m/s in y to let bird move in x 
 
         if (Input.GetMouseButtonDown(0))
         {
-            BirdRB.velocity = new Vector2(BirdRB.velocity.x, speed);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y 
+            BirdRB.velocity = new Vector2(BirdRB.velocity.x, speedY);    //set speed in y and current velocity which is already speed 5f in x to let bird move in y
         }
     }
 
@@ -112,7 +104,7 @@ public class Bird : MonoBehaviour
 
     public void OkBtn()
     {
-        GameTime = 0;
+        gameTime = 0;
         score = 0;
 
         can.GetComponent<CanvasGroup>().interactable = true;
