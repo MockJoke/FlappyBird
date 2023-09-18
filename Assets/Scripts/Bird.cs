@@ -8,8 +8,11 @@ public class Bird : MonoBehaviour
     [SerializeField] private float speedX = 5f;
     [SerializeField] private float speedY = 5f;
     [SerializeField] private GameObject can;
-    [SerializeField] private GameObject GameOver;
-    [SerializeField] private Text TimeBoard, ScoreBoard;
+    [SerializeField] private GameObject GameOverScreenObj;
+    [SerializeField] private GameObject PauseScreenObj;
+    [SerializeField] private Text TimeBoard; 
+    [SerializeField] private Text GameOverScoreBoard;
+    [SerializeField] private Text PauseScoreBoard;
     [SerializeField] private Animator animator;
     
     private int score = 0;
@@ -42,8 +45,6 @@ public class Bird : MonoBehaviour
         gameTime += Time.deltaTime;
         timeCounter = Mathf.FloorToInt(gameTime);
         TimeBoard.text = "TIME: " + timeCounter;
-
-        ScoreBoard.text = "" + score;
         
         if(HighScore < score)
         {
@@ -87,11 +88,12 @@ public class Bird : MonoBehaviour
             Time.timeScale = 0;
 
             can.GetComponent<CanvasGroup>().interactable = false;
-            GameOver.SetActive(true); 
+            GameOverScreenObj.SetActive(true);
+            GameOverScoreBoard.text = "" + score;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("counter"))
         {
@@ -105,10 +107,27 @@ public class Bird : MonoBehaviour
         score = 0;
 
         can.GetComponent<CanvasGroup>().interactable = true;
-        GameOver.SetActive(false);
+        GameOverScreenObj.SetActive(false);
         SceneManager.LoadScene("Play");
     }
 
+    public void PauseBtn()
+    {
+        Time.timeScale = 0;
+
+        can.GetComponent<CanvasGroup>().interactable = false;
+        PauseScreenObj.SetActive(true);
+        PauseScoreBoard.text = "" + score;
+    }
+
+    public void ResumeBtn()
+    {
+        Time.timeScale = 1;
+        
+        can.GetComponent<CanvasGroup>().interactable = true;
+        PauseScreenObj.SetActive(false);
+    }
+    
     private void OnDestroy()
     {
         Time.timeScale = 1;
