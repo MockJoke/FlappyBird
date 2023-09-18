@@ -82,9 +82,6 @@ public class Bird : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("pipes"))
         {
-            //FlappyBird.velocity = new Vector2(0f, 0f);
-            //Vector2 pos = new Vector2(transform.position.x, -4.5f);
-            //FlappyBird.position = pos;
             animator.SetTrigger(BirdDieAnimHash);
 
             Time.timeScale = 0;
