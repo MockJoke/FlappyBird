@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6755087490928521813}
   m_Layer: 0
   m_Name: counter
-  m_TagString: pipes
+  m_TagString: counter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
